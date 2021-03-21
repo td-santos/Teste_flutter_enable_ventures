@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_app_enable_ventures/models/keys_model.dart';
 import 'package:flutter_app_enable_ventures/models/user_model.dart';
@@ -25,5 +27,17 @@ class ApiRepository{
     UserModel user = UserModel.fromJson(response.data);
 
     return user;
+  }
+
+  Future<List> getSuggestions(String apiKey, String userToken)async{   
+    
+    Dio dio = Dio();
+      
+    Response response = await dio.get('$baseUrl/suggestion',
+      options: Options(headers: {'Authorization': userToken,'x-api-key': apiKey}));    
+
+    List teste = response.data;
+
+    return teste;
   }
 }
