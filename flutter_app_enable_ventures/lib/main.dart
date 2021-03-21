@@ -6,6 +6,8 @@ import 'package:flutter_app_enable_ventures/views/home_page/home_page.dart';
 import 'package:flutter_app_enable_ventures/views/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'stores/user_store.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -20,7 +22,8 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        Provider<KeysStore>.value(value: KeysStore())
+        Provider<KeysStore>.value(value: KeysStore()),
+        Provider<UserStore>.value(value: UserStore()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
