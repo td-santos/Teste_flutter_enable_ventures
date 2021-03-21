@@ -1,16 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_app_enable_ventures/models/keys_model.dart';
 
 
 class ApiRepository{
 
-  Future<Map> loadKeys()async{
+  Future<KeysModel> loadKeys()async{
 
-    Dio dio = Dio();         
+    Dio dio = Dio();
+             
       Response response = await dio.get('http://192.168.0.105:4040/keys'); 
-      Map data = response.data;  
-
-      print(data);
+      KeysModel keys = KeysModel.fromJson(response.data);      
     
-    return data;
+    return keys;
   }
+
+  
 }
