@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_enable_ventures/controllers/keys_controller.dart';
-import 'package:flutter_app_enable_ventures/repositories/api_repository.dart';
 import 'package:flutter_app_enable_ventures/stores/keys_store.dart';
-import 'package:flutter_app_enable_ventures/views/home_page/home_page.dart';
 import 'package:flutter_app_enable_ventures/views/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
