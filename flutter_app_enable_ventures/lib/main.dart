@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_enable_ventures/stores/keys_store.dart';
+import 'package:flutter_app_enable_ventures/stores/tips_store.dart';
 import 'package:flutter_app_enable_ventures/views/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<KeysStore>.value(value: KeysStore()),
         Provider<UserStore>.value(value: UserStore()),
+        Provider<TipsStore>.value(value: TipsStore()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

@@ -47,7 +47,18 @@ class ApiRepository{
     Response response = await dio.get('$baseUrl/tips',
       options: Options(headers: {'x-api-key': apiKey}));
 
-    List tips = response.data;
+    List tips = response.data;    
+
+    return tips;
+  }
+
+  Future<Map> setLikeDislikeTips(String apiKey, String userToken, String tipId, String action)async{
+    Dio dio = Dio();
+    
+    Response response = await dio.post('$baseUrl/survey/tips/$tipId/$action',
+      options: Options(headers: {'Authorization' : userToken,'x-api-key': apiKey}));
+
+    Map tips = response.data;
 
     //print(response.data);
 

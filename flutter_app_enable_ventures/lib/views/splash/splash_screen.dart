@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var store = Provider.of<KeysStore>(context);  
     var storeUser = Provider.of<UserStore>(context);
 
-    Future.delayed(Duration(milliseconds: 1000),()async{
+    Future.delayed(Duration(milliseconds: 1500),()async{
       await _keysController.getKeysApi().then((data) {
         store.setKeys(data.auth, data.tips, data.suggestion, data.survey);
 

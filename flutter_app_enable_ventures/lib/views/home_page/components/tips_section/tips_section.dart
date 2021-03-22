@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_enable_ventures/controllers/home_controller.dart';
 import 'package:flutter_app_enable_ventures/models/tips_model.dart';
+import 'package:flutter_app_enable_ventures/stores/keys_store.dart';
+import 'package:flutter_app_enable_ventures/stores/tips_store.dart';
+import 'package:flutter_app_enable_ventures/stores/user_store.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class TipsSection extends StatelessWidget {
-  final TipsModel tips;
 
-  const TipsSection({Key key, this.tips}) : super(key: key);
+  final TipsModel tips;
+  HomeController _homeController = HomeController();
+
+  TipsSection({Key key, this.tips}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+
+    var storeKey = Provider.of<KeysStore>(context);
+    var storeUser = Provider.of<UserStore>(context);
+    var storeTips = Provider.of<TipsStore>(context);
+
     return Container(
       padding: EdgeInsets.all(13),
       decoration: BoxDecoration(
@@ -50,17 +64,41 @@ class TipsSection extends StatelessWidget {
                   fontSize: 15,
                 ),
               ),
-              Row(
+              Observer(
+                builder: (_){
+                  return Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButton(                    
-                    icon: Icon(Icons.thumb_up,color: Colors.blueGrey[400],), 
-                    onPressed: (){}),
+                    icon: Icon(
+                      Icons.thumb_up,
+                      color: storeTips.like == false
+                      ?Colors.blueGrey[400]
+                      :Colors.blue[700]
+                    ), 
+                    onPressed: (){                      
+                      _homeController.setLikeDislike(
+                        storeKey.keySurvey, storeUser.token, tips.id, 'like').then((value) {
+                          storeTips.setLike(true);
+                      });
+                    }),
                   IconButton(                    
-                    icon: Icon(Icons.thumb_down,color: Colors.blueGrey[400],), 
-                    onPressed: (){}),
+                    icon: Icon(
+                      Icons.thumb_down,
+                      color: storeTips.dislike == false
+                      ?Colors.blueGrey[400]
+                      :Colors.blue[700]
+                    ), 
+                    onPressed: (){
+                      _homeController.setLikeDislike(
+                        storeKey.keySurvey, storeUser.token, tips.id, 'dislike').then((value) {
+                          storeTips.setDislike(true);
+                      });
+                    }),
                 ],
+              );
+                }
               )
             ],
           )

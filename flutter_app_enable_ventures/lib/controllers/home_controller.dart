@@ -37,4 +37,12 @@ class HomeController {
      });
      
   }
+
+  Future setLikeDislike(String apiKey, String userToken, String tipId, String action)async{    
+    
+    var data = await repository.setLikeDislikeTips(apiKey,userToken,tipId,action);
+    
+    return data;
+     
+  }
 }
