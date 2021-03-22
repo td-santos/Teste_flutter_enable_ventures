@@ -31,12 +31,16 @@ class TipsSection extends StatelessWidget {
           SizedBox(height: 5),
           Row(
             children: [
-              OutlinedButton(
-                onPressed: () {},
-                style: ButtonStyle(side: MaterialStateProperty.all(BorderSide(color: Colors.blue[900], width: 1))),
-                child: Text('CHECAR CURRICULO',
-                  style: TextStyle(color: Colors.blue[900], fontSize: 12),
-                ),
+              Expanded(
+                child: tips.button.show == true
+                ?OutlinedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(side: MaterialStateProperty.all(BorderSide(color: Colors.blue[900], width: 1))),
+                  child: Text('${tips.button.label.toUpperCase()}',
+                    style: TextStyle(color: Colors.blue[900], fontSize: 12),
+                  ),
+                )
+                : Container()
               ),
               SizedBox(width: 10),
               Text('Achou útil?',
