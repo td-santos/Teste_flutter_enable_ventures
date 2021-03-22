@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app_enable_ventures/controllers/home_controller.dart';
 import 'package:flutter_app_enable_ventures/models/tips_model.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_app_enable_ventures/views/home_page/components/appbar/cu
 import 'package:flutter_app_enable_ventures/views/home_page/components/tips_section/tips_section.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-
 import 'components/suggestion_section/suggestion_section.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,11 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var storeKey = Provider.of<KeysStore>(context);
     var storeUser = Provider.of<UserStore>(context);
-
-    //_homeController.getUserApi(storeKey.keyAuth).then((user) {
-    //  storeUser.setKeys(user.id, user.name, user.token, user.photo);
-    //});
-
+    
     return Scaffold(
       backgroundColor: Colors.blue[900],
       appBar: PreferredSize(

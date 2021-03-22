@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_app_enable_ventures/models/keys_model.dart';
 import 'package:flutter_app_enable_ventures/models/user_model.dart';
@@ -60,7 +58,6 @@ class ApiRepository{
 
     Map tips = response.data;
 
-    //print(response.data);
 
     return tips;
   }
