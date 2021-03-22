@@ -1,9 +1,12 @@
 import 'package:flutter_app_enable_ventures/models/suggestion_model.dart';
+import 'package:flutter_app_enable_ventures/models/tips_model.dart';
 import 'package:flutter_app_enable_ventures/models/user_model.dart';
 import 'package:flutter_app_enable_ventures/repositories/api_repository.dart';
 
 class HomeController {
   List<SuggestionModel> suggestionList =[];
+  List<TipsModel> tips =[];
+
   ApiRepository repository;
 
   HomeController() {
@@ -22,8 +25,16 @@ class HomeController {
     
      data.forEach((data) {
        suggestionList.add(SuggestionModel.fromJson(data));
+     });    
+     
+  }
+
+  Future getTips(String apiKey)async{    
+    tips.clear();
+    var data = await repository.getTips(apiKey);
+    data.forEach((data) {
+      tips.add(TipsModel.fromJson(data));
      });
-    
      
   }
 }

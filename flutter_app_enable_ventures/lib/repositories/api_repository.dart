@@ -36,8 +36,21 @@ class ApiRepository{
     Response response = await dio.get('$baseUrl/suggestion',
       options: Options(headers: {'Authorization': userToken,'x-api-key': apiKey}));    
 
-    List teste = response.data;
+    List suggestions = response.data;
 
-    return teste;
+    return suggestions;
+  }
+
+  Future<List> getTips(String apiKey)async{
+    Dio dio = Dio();
+    
+    Response response = await dio.get('$baseUrl/tips',
+      options: Options(headers: {'x-api-key': apiKey}));
+
+    List tips = response.data;
+
+    //print(response.data);
+
+    return tips;
   }
 }

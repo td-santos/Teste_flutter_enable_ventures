@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_enable_ventures/controllers/home_controller.dart';
 import 'package:flutter_app_enable_ventures/controllers/keys_controller.dart';
 import 'package:flutter_app_enable_ventures/stores/keys_store.dart';
+import 'package:flutter_app_enable_ventures/stores/user_store.dart';
 import 'package:flutter_app_enable_ventures/views/home_page/home_page.dart';
 import 'package:provider/provider.dart';
 
@@ -12,16 +14,23 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
 
   KeysController _keysController = KeysController();
+  HomeController _homeController = HomeController();
 
   
   @override
   Widget build(BuildContext context) {
 
     var store = Provider.of<KeysStore>(context);  
+    var storeUser = Provider.of<UserStore>(context);
 
-    Future.delayed(Duration(milliseconds: 1000),(){
-      _keysController.getKeysApi().then((data) {
+    Future.delayed(Duration(milliseconds: 1000),()async{
+      await _keysController.getKeysApi().then((data) {
         store.setKeys(data.auth, data.tips, data.suggestion, data.survey);
+
+        _homeController.getUserApi(store.keyAuth).then((user) {
+          storeUser.setKeys(user.id, user.name, user.token, user.photo);
+        });        
+
         Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context)=> HomePage()
         ));
